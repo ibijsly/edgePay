@@ -1,6 +1,6 @@
 package com.edgePay.configuration;
 
-import com.portaAgent.heritage.service.MyUserDetailService;
+import com.edgePay.service.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

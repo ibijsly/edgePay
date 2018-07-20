@@ -38,18 +38,6 @@ public class Role {
     @Column(length = 1024)
     private String priviledges;
 
-    @Transient
-    private boolean dashboard = false;
-
-    @Transient
-    private boolean users;
-
-    @Transient
-    private boolean transactions;
-
-    @Transient
-    private boolean roleView;
-
 
     public Role() {
     }
@@ -116,38 +104,6 @@ public class Role {
 
     public void setPriviledges(String priviledges) {
         this.priviledges = priviledges;
-    }
-
-    public boolean isDashboard() {
-        return dashboard;
-    }
-
-    public void setDashboard(boolean dashboard) {
-        this.dashboard = dashboard;
-    }
-
-    public boolean isUsers() {
-        return users;
-    }
-
-    public void setUsers(boolean users) {
-        this.users = users;
-    }
-
-    public boolean isTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(boolean transactions) {
-        this.transactions = transactions;
-    }
-
-    public boolean isRoleView() {
-        return roleView;
-    }
-
-    public void setRoleView(boolean roleView) {
-        this.roleView = roleView;
     }
 
     @Override
