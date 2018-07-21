@@ -42,7 +42,6 @@ public class User implements UserDetails, Serializable {
     @Column()
     private long registeredBy;
 
-
     private long approvedBy;
 
     @Column(nullable = true, unique = true)
@@ -57,6 +56,7 @@ public class User implements UserDetails, Serializable {
     private Date createdAt;
 
     @UpdateTimestamp
+    @JsonFormat(pattern = "YYYY-MM-dd")
     private Date updatedAt;
 
     @Transient
@@ -67,6 +67,8 @@ public class User implements UserDetails, Serializable {
     @JoinColumn(name = "rolegroup_id", referencedColumnName = "id")
     @JsonManagedReference
     private RoleGroup roleGroup;
+
+    private String phone;
 
     public User() {
     }
@@ -231,6 +233,14 @@ public class User implements UserDetails, Serializable {
         }
 
         return false;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     @Override
