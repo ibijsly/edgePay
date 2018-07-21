@@ -1,8 +1,6 @@
 package com.edgePay.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,6 +14,7 @@ import java.io.Serializable;
 import java.util.*;
 
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements UserDetails, Serializable {
 
     @Id
@@ -31,19 +30,11 @@ public class User implements UserDetails, Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @Email(message = "Please provide a valid email")
-    @Column(unique = true, nullable = false)
     private String email;
 
     private String firstname;
 
     private String lastname;
-
-    @Column()
-    private long registeredBy;
-
-
-    private long approvedBy;
 
     @Column(nullable = true, unique = true)
     private String confirmationToken;
@@ -59,13 +50,9 @@ public class User implements UserDetails, Serializable {
     @UpdateTimestamp
     private Date updatedAt;
 
-    @Transient
-    private String roleGroupType;
-
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rolegroup_id", referencedColumnName = "id")
-    @JsonManagedReference
+//    @JsonManagedReference
     private RoleGroup roleGroup;
 
     public User() {
@@ -139,22 +126,6 @@ public class User implements UserDetails, Serializable {
         this.enabled = enabled;
     }
 
-    public long getRegisteredBy() {
-        return registeredBy;
-    }
-
-    public void setRegisteredBy(long registeredBy) {
-        this.registeredBy = registeredBy;
-    }
-
-    public String getRoleGroupType() {
-        return roleGroupType;
-    }
-
-    public void setRoleGroupType(String roleGroupType) {
-        this.roleGroupType = roleGroupType;
-    }
-
     public RoleGroup getRoleGroup() {
         return roleGroup;
     }
@@ -216,14 +187,6 @@ public class User implements UserDetails, Serializable {
         this.updatedAt = updatedAt;
     }
 
-    public long getApprovedBy() {
-        return approvedBy;
-    }
-
-    public void setApprovedBy(long approvedBy) {
-        this.approvedBy = approvedBy;
-    }
-
     public boolean hasRole(String role){
         for(GrantedAuthority authority : getAuthorities()){
             if(authority.getAuthority().equalsIgnoreCase(role))
@@ -237,7 +200,8 @@ public class User implements UserDetails, Serializable {
     public String toString() {
         return "User{" + "id=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + ", email='"
                 + email + '\'' + ", firstname='" + firstname + '\'' + ", lastname='" + lastname + '\''
-                + ", registeredBy=" + registeredBy + ", confirmationToken='" + confirmationToken + '\'' + ", enabled="
+                + ", confirmationToken='" + confirmationToken + '\'' + ", enabled="
                 + enabled + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
     }
+
 }
