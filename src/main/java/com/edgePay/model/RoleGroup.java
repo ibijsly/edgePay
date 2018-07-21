@@ -40,11 +40,11 @@ public class RoleGroup {
     private Date UpdatedAt;
 
     @OneToMany(mappedBy = "roleGroup")
-    @JsonBackReference
+//    @JsonBackReference
     private List<User> user;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonManagedReference
+//    @JsonManagedReference
     private List<Role> role;
 
     public RoleGroup() {
