@@ -28,7 +28,7 @@ public class EndUserService {
             if (check(endUser))
                 return new ResponseEntity<ResponseModel>( new ResponseModel("01", "User Already Exist", endUser), HttpStatus.CONFLICT);
 
-            endUser.setRegisteredBy(userService.getUserByUsername(principal.getName()).getId());
+//            endUser.setRegisteredBy(userService.getUserByUsername(principal.getName()).getId());
 //            endUser.setRoleGroup(roleGroupService.getRoleGroup(endUser.getRoleGroupType()));
             endUser.setCreatedAt(new Date());
             endUserRepository.save(endUser);
