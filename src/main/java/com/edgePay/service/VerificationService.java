@@ -31,6 +31,8 @@ public class VerificationService {
 
         Faker faker = new Faker();
         response.put("fullname", faker.name().fullName());
+
+        return response;
     }
 
     private Map<String, Object> verifyVIN(String vin){
@@ -39,5 +41,7 @@ public class VerificationService {
 
         Faker faker = new Faker();
         response.put("fullname", faker.name().fullName());
+
+        return response;
     }
 }
